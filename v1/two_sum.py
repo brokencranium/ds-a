@@ -25,14 +25,13 @@ Output: [0,1]
 
 def two_sum(nums: list[int], target: int) -> list[int] | None:
     complement = {}
-    # Get the difference with the target
-    for curr_index, num in enumerate(nums):
-        diff = target - num
+    for index, val in enumerate(nums):
+        result = target - val
 
-        if (first_index := complement.get(num)) is not None:
-            return [first_index, curr_index]
+        if (prev_index := complement.get(val)) is not None:
+            return [prev_index, index]
 
-        complement[diff] = curr_index
+        complement[result] = index
 
     return None
 

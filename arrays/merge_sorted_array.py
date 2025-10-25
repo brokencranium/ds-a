@@ -47,7 +47,7 @@ class Solution:
                 index1 += 1
                 index2 += 1
 
-    def merge_v1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+    def merge_v2(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
         """
@@ -68,47 +68,68 @@ class Solution:
                 nums1[p] = nums2[p2]
                 p2 -= 1
 
+    def merge_v3(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        if m == 0 and n == 0:
+            return
 
-if __name__ == '__main__':
+        if m == 0 and n > 0:
+            nums1[0] = nums2[0]
+            return
+
+        index1 = index2 = 0 
+        for index in range(m):
+            if nums2[index2] < nums1[index1]:
+                nums1[index1 + 1 :] = nums1[index1:n]
+                nums1[index] = nums2[index]
+                n -= 1
+            else: 
+                u += 1
+
+
+if __name__ == "__main__":
     sol = Solution()
     nums1 = [1, 5, 8, 0, 0, 0, 0, 0]
     m = 3
     nums2 = [-1, 2, 2, 4, 6]
     n = 5
-    sol.merge_v1(nums1, m, nums2, n)
-    print(nums1)
+    sol.merge_v3(nums1, m, nums2, n)
+    print(nums1, [-1, 1, 2, 2, 5, 0, 0, 0])
+    assert nums1 == [-1, 1, 2, 2, 5, 0, 0, 0]
 
-    nums1 = [1, 2, 3, 0, 0, 0]
-    m = 3
-    nums2 = [2, 5, 6]
-    n = 3
-    sol.merge_v1(nums1, m, nums2, n)
-    print(nums1)
-    # #
-    nums1 = [1]
-    m = 1
-    nums2 = []
-    n = 0
-    sol.merge_v1(nums1, m, nums2, n)
-    print(nums1)
+    # nums1 = [1, 2, 3, 0, 0, 0]
+    # m = 3
+    # nums2 = [2, 5, 6]
+    # n = 3
+    # sol.merge_v1(nums1, m, nums2, n)
+    # print(nums1)
     # # #
-    nums1 = [0]
-    m = 0
-    nums2 = [1]
-    n = 1
-    sol.merge_v1(nums1, m, nums2, n)
-    print(nums1)
-    # # #
-    nums1 = [4, 0, 0, 0, 0, 0]
-    m = 1
-    nums2 = [1, 2, 3, 5, 6]
-    n = 5
-    sol.merge_v1(nums1, m, nums2, n)
-    print(nums1)
-    ###
-    nums1 = [2, 0]
-    nums2 = [1]
-    m = 1
-    n = 1
-    sol.merge_v1(nums1, m, nums2, n)
-    print(nums1)
+    # nums1 = [1]
+    # m = 1
+    # nums2 = []
+    # n = 0
+    # sol.merge_v1(nums1, m, nums2, n)
+    # print(nums1)
+    # # # #
+    # nums1 = [0]
+    # m = 0
+    # nums2 = [1]
+    # n = 1
+    # sol.merge_v1(nums1, m, nums2, n)
+    # print(nums1)
+    # # # #
+    # nums1 = [4, 0, 0, 0, 0, 0]
+    # m = 1
+    # nums2 = [1, 2, 3, 5, 6]
+    # n = 5
+    # sol.merge_v1(nums1, m, nums2, n)
+    # print(nums1)
+    # ###
+    # nums1 = [2, 0]
+    # nums2 = [1]
+    # m = 1
+    # n = 1
+    # sol.merge_v1(nums1, m, nums2, n)
+    # print(nums1)
